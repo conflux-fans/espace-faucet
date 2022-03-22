@@ -1,6 +1,7 @@
 import 'dotenv/config' 
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
+import cors from '@koa/cors';
 import routes from './router.mjs';
 
 const PORT = process.env.PORT;
@@ -9,6 +10,7 @@ const app = new Koa();
 app.use(bodyParser({
   enableTypes: ['json', 'text'],
 }));
+app.use(cors());
 
 // Error handler
 app.on('error', err => {
