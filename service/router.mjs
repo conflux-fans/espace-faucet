@@ -1,6 +1,10 @@
 import { ethers } from 'ethers';
 import Router from 'koa-router';
-import { transferCFX } from './txSender.mjs'; 
+import { transferCFX } from './txSender.mjs';
+// import { default as axios}  from 'axios';
+import superagent from 'superagent';
+
+const URL = 'https://evm.confluxrpc.com';
 const router = new Router({prefix: '/api/v1'});
 
 const lastClaimCache = {};
@@ -23,6 +27,12 @@ router.get('/faucet', async ctx => {
   // await tx.wait(); // TODO whether need to wait
 
   ctx.body = tx;
+});
+
+// RPC proxy
+router.post('/rpc', async ctx => {
+  const result = await superagent.post(URL).send(ctx.request.body);
+  ctx.body = result.body;
 });
 
 export default router;
