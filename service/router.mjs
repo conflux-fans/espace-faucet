@@ -11,8 +11,8 @@ const lastClaimCache = {};
 // Every hour one time
 router.get('/faucet', async ctx => {
   let { address } = ctx.request.query;
-  ctx.assert(address, 400, 'Address is required');
   address = ethers.utils.getAddress(address); // check address format
+  ctx.assert(address, 400, 'Address is required');
 
   // check cache
   if (!lastClaimCache[address]) {

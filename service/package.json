@@ -26,5 +26,8 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "superagent": "^7.1.1"
+  },
+  "devDependencies": {
+    "js-conflux-sdk": "^2.0.4"
   }
 }
