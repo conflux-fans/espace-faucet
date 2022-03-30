@@ -23,7 +23,12 @@ export default {
         .then((data) => {
           this.claiming = false;
           if (data.code) {
-            alert("Claim failed: " + data.message);
+            // pretty message
+            let message = data.message;
+            if (message.match("Tx with same nonce already inserted")) {
+              message = "Service is bussy, please try again later";
+            }
+            alert("Claim failed: " + message);
           } else {
             this.hash = data.hash;
             alert("Claimed success!");

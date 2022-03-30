@@ -21,6 +21,7 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch (err) {
+    console.log(err.message);
     const status = err.statusCode || err.status || 500;
     ctx.status = status;
     ctx.body = {
