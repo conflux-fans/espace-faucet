@@ -1,7 +1,6 @@
 import { ethers } from 'ethers';
 import Router from 'koa-router';
 import { transferCFX } from './txSender.mjs';
-// import { default as axios}  from 'axios';
 import superagent from 'superagent';
 
 const URL = 'https://evm.confluxrpc.com';
@@ -20,10 +19,10 @@ router.get('/faucet', async ctx => {
     lastClaimCache[address] = Date.now() - 7200000;
   }
   ctx.assert(Date.now() - lastClaimCache[address] > 3600000, 400, 'You can claim only once an hour');
-  lastClaimCache[address] = Date.now();
 
   // send tx
   const tx = await transferCFX(address, '100');
+  lastClaimCache[address] = Date.now();
   // await tx.wait(); // TODO whether need to wait
 
   ctx.body = tx;

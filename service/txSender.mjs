@@ -4,6 +4,9 @@ const provider = new ethers.providers.JsonRpcProvider(process.env.ETH_RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 // The value unit is CFX
+// Check balance
+// Get pending nonce
+// Send tx
 export async function transferCFX(to, value = '0') {
   value = ethers.utils.parseEther(value);
   const balance = await signer.getBalance();

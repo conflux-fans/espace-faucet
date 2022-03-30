@@ -1,10 +1,12 @@
 <script>
-const URL = "http://localhost:3001/api/v1";
+// const URL = "http://47.93.101.243/api/v1";
+const URL = "https://cfxfaucet.confluxnetwork.org/api/v1";
 export default {
   data() {
     return {
       address: "",
       hash: "",
+      claiming: false,
     };
   },
 
@@ -15,17 +17,20 @@ export default {
         alert("Please enter an address");
         return;
       }
+      this.claiming = true;
       fetch(`${URL}/faucet?address=${this.address}`)
         .then((response) => response.json())
         .then((data) => {
+          this.claiming = false;
           if (data.code) {
-            alert("Claim failed!", data.message);
+            alert("Claim failed: " + data.message);
           } else {
             this.hash = data.hash;
             alert("Claimed success!");
           }
         })
         .catch((error) => {
+          this.claiming = false;
           console.log("error", error);
           alert("Error: " + error);
         });
@@ -50,7 +55,9 @@ export default {
         placeholder="Input your hex40 address"
       />
       &nbsp;
-      <button @click="getFaucet">Claim</button>
+      <button @click="getFaucet">
+        <i v-if="claiming" class="fa fa-spinner fa-spin"></i> &nbsp; Claim
+      </button>
     </form>
     <div class="mt-10" style="color: #2c3e50">
       <p>One address can claim 100 testnet eSpace CFX per hour</p>
