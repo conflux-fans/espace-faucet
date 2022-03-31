@@ -1,6 +1,14 @@
 <script>
+/* eslint-disable no-undef */
 // const URL = "http://47.93.101.243/api/v1";
 const URL = "https://cfxfaucet.confluxnetwork.org/api/v1";
+// const URL = 'http://localhost:3001/api/v1';
+const RECAPTCHA = '6Le6QDIfAAAAAGQe665G-jCoG9JFoRuDCoJpeXX9';
+
+function getCaptcha(cbk) {
+  grecaptcha.execute(RECAPTCHA, {action: 'submit'}).then(cbk);
+}
+
 export default {
   data() {
     return {
@@ -18,27 +26,38 @@ export default {
         return;
       }
       this.claiming = true;
-      fetch(`${URL}/faucet?address=${this.address}`)
-        .then((response) => response.json())
-        .then((data) => {
-          this.claiming = false;
-          if (data.code) {
-            // pretty message
-            let message = data.message;
-            if (message.match("Tx with same nonce already inserted")) {
-              message = "Service is busy, please try again later";
-            }
-            alert("Claim failed: " + message);
-          } else {
-            this.hash = data.hash;
-            alert("Claimed success!");
-          }
+
+      getCaptcha((token) => {
+        console.log(token);
+        // fetch(`${URL}/faucet?address=${this.address}&token=${token}`)
+        fetch(`${URL}/faucet`, {
+          method: "POST",
+          body: JSON.stringify({ address: this.address, token: token }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         })
-        .catch((error) => {
-          this.claiming = false;
-          console.log("error", error);
-          alert("Error: " + error);
-        });
+          .then((response) => response.json())
+          .then((data) => {
+            this.claiming = false;
+            if (data.code) {
+              // pretty message
+              let message = data.message;
+              if (message.match("Tx with same nonce already inserted")) {
+                message = "Service is busy, please try again later";
+              }
+              alert("Claim failed: " + message);
+            } else {
+              this.hash = data.hash;
+              alert("Claimed success!");
+            }
+          })
+          .catch((error) => {
+            this.claiming = false;
+            console.log("error", error);
+            alert("Error: " + error);
+          });
+      });
     },
   },
 
