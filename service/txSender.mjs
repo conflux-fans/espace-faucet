@@ -6,18 +6,7 @@ let number = 0;
 
 // RoundRobin balancer
 function getSinger() {
-  let key;
-  switch (number %3) {
-    case 0:
-      key = process.env.PRIVATE_KEY;
-      break;
-    case 1:
-      key = process.env.PRIVATE_KEY2;
-      break;
-    case 2:
-      key = process.env.PRIVATE_KEY3;
-      break;
-  }
+  const key = process.env[`PRIVATE_KEY${number %6}`];
   const signer = new ethers.Wallet(key, provider);
   number++;
   return signer;
