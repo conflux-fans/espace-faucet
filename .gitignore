@@ -105,3 +105,4 @@ dist
 
 # App file to ignore
 service/.env
+info.md

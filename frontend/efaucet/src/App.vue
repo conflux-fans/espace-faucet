@@ -26,7 +26,7 @@ export default {
             // pretty message
             let message = data.message;
             if (message.match("Tx with same nonce already inserted")) {
-              message = "Service is bussy, please try again later";
+              message = "Service is busy, please try again later";
             }
             alert("Claim failed: " + message);
           } else {
