@@ -13,6 +13,8 @@ router.post('/faucet', async ctx => {
     address,
     token
   } = ctx.request.body;
+  ctx.assert(address, 400, 'address is required');
+  ctx.assert(token, 400, 'token is required');
   address = ethers.utils.getAddress(address); // check address format
   ctx.assert(address, 400, 'Address is required');
 
