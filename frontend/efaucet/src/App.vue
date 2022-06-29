@@ -1,7 +1,7 @@
 <script>
 /* eslint-disable no-undef */
 // const URL = "http://47.93.101.243/api/v1";
-const URL = "https://cfxfaucet.confluxnetwork.org/api/v1";
+const URL = "https://evmtestnet.conflux123.xyz/api/v1";
 // const URL = 'http://localhost:3001/api/v1';
 const RECAPTCHA = '6Le6QDIfAAAAAGQe665G-jCoG9JFoRuDCoJpeXX9';
 
