@@ -172,6 +172,10 @@ export default {
       <ul>
         <li>One address can claim one kind eSpace testnet token per hour</li>
         <li>Click captcha image to refresh it</li>
+        <li>
+          Conflux Core Space faucet is at
+          <a href="https://faucet.confluxnetwork.org/">here</a>
+        </li>
       </ul>
     </div>
   </div>
