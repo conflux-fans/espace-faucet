@@ -120,6 +120,12 @@ export default {
     },
   },
 
+  computed: {
+    txScanLink() {
+      return `https://evmtestnet.confluxscan.net/tx/${this.hash}`;
+    },
+  },
+
   mounted() {
     console.log(`App mounted`);
     this.getCaptcha();
@@ -160,7 +166,7 @@ export default {
       </div>
     </form>
     <div v-if="hash">
-      <span>TX Hash: {{ hash }}</span>
+      <span><a :href="txScanLink">Check Transaction on ConfluxScan</a></span>
     </div>
     <div class="mt-10" style="color: #2c3e50">
       <ul>
