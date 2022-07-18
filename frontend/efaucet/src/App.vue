@@ -91,7 +91,7 @@ export default {
             this.claiming = false;
             if (data.code === 0) {
               alert("Claimed sucess!");
-              this.hash = data.hash;
+              this.hash = data.data;
             } else {
               alert("Claim failed: " + data.message);
             }
@@ -110,7 +110,7 @@ export default {
             this.claiming = false;
             if (data.code === 0) {
               alert("Claimed sucess!");
-              this.hash = data.hash;
+              this.hash = data.data;
             } else {
               alert("Claim failed: " + data.message);
             }
@@ -118,7 +118,6 @@ export default {
           .catch((err) => console.log(err));
       }
     },
-
   },
 
   mounted() {
