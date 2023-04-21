@@ -1,6 +1,12 @@
-# espace-faucet
+# espace-faucet frontend
 
-## 如何增加比重
+## How to deploy
 
-修改 frontend/efaucet/src/App.vue 中，在 token 下拉框中增加一个 token 选项即可
+```shell
+cd frontend/efaucet
+./deploy.sh
+```
 
+## Note
+
+Code in service is deprecated.
