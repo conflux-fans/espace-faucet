@@ -154,6 +154,7 @@ export default {
           <option value="usdc">USDC</option>
           <option value="nut">NUT</option>
           <option value="phx">PHX</option>
+          <option value="usdt0">USDT0</option>
         </select>
       </div>
       <div class="captcha2btn">
